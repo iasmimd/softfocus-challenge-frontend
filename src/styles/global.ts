@@ -29,6 +29,7 @@ export default createGlobalStyle`
     body{
         background-color: var(--white);
         height: 100vh;
+        font-family: 'Nunito', sans-serif;
     }
 
     button, svg{
