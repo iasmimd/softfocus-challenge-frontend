@@ -4,7 +4,7 @@ interface ChildrenProps {
   children: React.ReactNode
 }
 
-const Card = ({children}: ChildrenProps) => {
+const RegistrationCard = ({children}: ChildrenProps) => {
     return(
         <Container>
             {children}
@@ -12,4 +12,4 @@ const Card = ({children}: ChildrenProps) => {
     )
 }
 
-export default Card
+export default RegistrationCard

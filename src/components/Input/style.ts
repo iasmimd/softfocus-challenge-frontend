@@ -1,14 +1,10 @@
 import styled, { css } from 'styled-components';
 
-interface ContainerProps {
-  error?: boolean;
-}
-
-export const Container = styled.div<ContainerProps>`
+export const Container = styled.div`
   background: transparent;
   height: 4.5rem;
   width: 100%;
-  max-width: 350px;
+  max-width: 360px;
   margin: 0 auto;
 
   div{
@@ -21,8 +17,12 @@ export const Container = styled.div<ContainerProps>`
     width: 100%;
     background-color: var(--white);
     border-radius: 5px;
+    border: 1px solid var(--white);
     border-style: none;
     padding-left: 10px;
   }
 
+  span{
+    color: var(--red);
+  }
 `

@@ -9,13 +9,15 @@ import { Container, Form } from './style';
 import logo from '../../assets/logo.svg';
 import { useAnalyst } from '../../providers/Analyst';
 
-interface AnalystLogin {
+interface AnalystRegister {
+  email: string;
   username: string;
   password: string;
 }
 
-const Login = () => {
+const Signup = () => {
   const schema = yup.object().shape({
+    email: yup.string().email('Insira um email válido').required('Campo obrigatório'),
     username: yup.string().required('Campo obrigatório'),
     password: yup.string().required('Campo obrigatório'),
   });
@@ -24,9 +26,9 @@ const Login = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<AnalystLogin>({ resolver: yupResolver(schema) });
+  } = useForm<AnalystRegister>({ resolver: yupResolver(schema) });
 
-  const { login } = useAnalyst();
+  const { signup } = useAnalyst();
 
   return (
     <Container>
@@ -34,11 +36,14 @@ const Login = () => {
         <img src={logo} />
         <p>Proagro</p>
       </div>
-      <Form onSubmit={handleSubmit(login)}>
-        <span className='top-span'>
-          Faça login, e gerencie comunicações de perda.
-        </span>
+      <Form onSubmit={handleSubmit(signup)}>
         <section>
+          <Input
+            label='Email'
+            name='email'
+            register={register}
+            error={errors.email?.message}
+          />
           <Input
             label='Nome de usuário'
             name='username'
@@ -52,10 +57,10 @@ const Login = () => {
             type='password'
             error={errors.password?.message}
           />
-          <Button type='submit'>Logar</Button>
+          <Button type='submit'>Cadastrar</Button>
         </section>
-        <span className='bottom-span'>
-          Ainda não criou uma credencial? <Link to="/signup">Cadastre-se aqui</Link>
+        <span className='span-bottom'>
+          Já possui uma credencial?<Link to='/'>Faça login</Link>
         </span>
       </Form>
       <Footer />
@@ -63,4 +68,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Signup;

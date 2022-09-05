@@ -17,6 +17,7 @@ export default createGlobalStyle`
         --secondary-100: #222823;
         --black: #08090a;
         --gray: #575A5E;
+        --red: #FC2F00;
     }
 
     input:focus, select:focus {
@@ -33,6 +34,10 @@ export default createGlobalStyle`
     button, svg{
         cursor: pointer;
         border-style: none;
+    }
+
+    a{
+        text-decoration: none;
     }
 
 `;

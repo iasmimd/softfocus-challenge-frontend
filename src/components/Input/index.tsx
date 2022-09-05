@@ -12,9 +12,9 @@ const Input = ({ label, name, register, error, ...rest }: InputProps) => {
   return  (
     <Container>
       <div>
-        {label} {!!error && <span> - {error} </span>}
+        {label} {error && <span> - {error} </span>}
       </div>
-      <input error={!!error} {...register(name)} {...rest} />
+      <input {...register(name)} {...rest} />
     </Container>
   );
 };
