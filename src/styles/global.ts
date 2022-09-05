@@ -20,12 +20,6 @@ export default createGlobalStyle`
         --red: #FC2F00;
     }
 
-    input:focus, select:focus {
-    box-shadow: 0 0 0 0;
-    border-style: none;
-    outline: 0;
-    } 
-
     body{
         background-color: var(--white);
         height: 100vh;
@@ -40,5 +34,23 @@ export default createGlobalStyle`
     a{
         text-decoration: none;
     }
+
+    ::-webkit-scrollbar {
+        width: 4px;
+        height: 2px;
+    }
+
+::-webkit-scrollbar-thumb {
+        background: #629460;
+        border: 0px none #ffffff;
+        border-radius: 0px;
+    }
+
+::-webkit-scrollbar-track {
+        background: #ffffff;
+        border: 0px none #ffffff;
+        border-radius: 50px;
+    }
+
 
 `;

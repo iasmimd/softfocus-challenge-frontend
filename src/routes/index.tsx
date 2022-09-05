@@ -2,6 +2,7 @@ import { Route, Switch } from 'react-router-dom';
 import Dashboard from '../pages/Dashboard';
 import Login from '../pages/Login';
 import Registration from '../pages/Registration';
+import RegistrationDetail from '../pages/RegistrationDetail';
 import Signup from '../pages/Signup';
 
 const Routes = () => {
@@ -18,6 +19,9 @@ const Routes = () => {
       </Route>
       <Route path='/registrar-comunicação'>
         <Registration />
+      </Route>
+      <Route path='/comunicações'>
+        <RegistrationDetail/>
       </Route>
     </Switch>
   );

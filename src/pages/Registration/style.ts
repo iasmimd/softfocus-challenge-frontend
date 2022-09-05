@@ -3,28 +3,22 @@ import styled from 'styled-components';
 export const Container = styled.div`
   width: 100%;
   height: 100vh;
+  padding-top: 10px;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-around;  
 
-  .logo {
+  h1{
     text-align: center;
-    padding-top: 60px;
-  }
-
-  img {
-    height: 100px;
-    width: 120px;
-    align-self: center;
+    font-size: 20px;
   }
 `;
 
 export const Form = styled.form`
-  height: 400px;
+  height: 660px;
   width: 80%;
   max-width: 450px;
   border-radius: 5px;
-  margin-bottom: 70px;
   background-color: var(--primary-300);
   display: flex;
   flex-direction: column;
@@ -45,20 +39,30 @@ export const Form = styled.form`
      justify-content: center;
    }
 
+  .inputs-form {
+    width: 80%;
+    padding-top: 20px;
+  }
+
+  .select-options{
+    display: flex;
+    flex-direction: column;
+  }
+
+  select{
+    border-radius: 5px;
+    height: 35px;
+  }
+
   a{
     padding-left: 5px;
     color: var(--primary-300);
   }
 
-  section {
-    width: 80%;
-    padding-top: 50px;
-  }
-
   button {
+    width: 100%;
     background-color: var(--primary-200);
     color: var(--white);
-    width: 100%;
   }
 
   button:hover {

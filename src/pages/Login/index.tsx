@@ -8,11 +8,7 @@ import Footer from '../../components/Footer';
 import { Container, Form } from './style';
 import logo from '../../assets/logo.svg';
 import { useAnalyst } from '../../providers/Analyst';
-
-interface AnalystLogin {
-  username: string;
-  password: string;
-}
+import {IAnalystLoginProps} from '../../interfaces/Analyst'
 
 const Login = () => {
   const schema = yup.object().shape({
@@ -24,7 +20,7 @@ const Login = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<AnalystLogin>({ resolver: yupResolver(schema) });
+  } = useForm<IAnalystLoginProps>({ resolver: yupResolver(schema) });
 
   const { login } = useAnalyst();
 

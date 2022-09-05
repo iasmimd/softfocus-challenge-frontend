@@ -5,9 +5,9 @@ import { Container } from './style';
 import Footer from '../../components/Footer';
 import nature from '../../assets/nature.svg';
 import { useHistory } from 'react-router-dom';
+import { useRegistration } from '../../providers/Registration';
 
 const Dashboard = () => {
-
   const history = useHistory()
 
   return (
@@ -32,7 +32,7 @@ const Dashboard = () => {
             img={file}
             title='Buscar comunicações de perda.'
             description='Liste os registros cadastrados, e busque uma comunicação pelo CPF do produtor.'
-            onClick={() => console.log('oid')}
+            onClick={() => history.push('/comunicações')}
           />
         </div>
         <img src={nature} className='nature-image' />

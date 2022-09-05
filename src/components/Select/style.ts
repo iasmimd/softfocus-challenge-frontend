@@ -12,14 +12,13 @@ export const Container = styled.div`
     color: var(--black);
   }
 
-  input {
+  select {
     height: 35px;
     width: 100%;
     background-color: var(--white);
     border-radius: 5px;
     border: 1px solid var(--white);
     border-style: none;
-    padding-left: 13px;
   }
 
   span{

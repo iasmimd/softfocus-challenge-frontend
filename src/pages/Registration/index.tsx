@@ -7,19 +7,12 @@ import Input from '../../components/Input';
 import Footer from '../../components/Footer';
 import { Container, Form } from './style';
 import logo from '../../assets/logo.svg';
-import { useAnalyst } from '../../providers/Analyst';
 import { cpf } from 'cpf-cnpj-validator';
+import { useRegistration } from '../../providers/Registration';
+import Select from '../../components/Select';
+import {IRegistrationProps} from '../../interfaces/Registration'
 
-interface RegistrationData {
-  farmer_name: string;
-  farmer_email: string;
-  farmer_cpf: string;
-  latitude: number;
-  longitude: number;
-  tillage_type: string;
-  harvest_date: Date;
-  cause: string;
-}
+
 
 const Registration = () => {
   const date = new Date();
@@ -32,55 +25,103 @@ const Registration = () => {
       .required('Campo obrigatório'),
     farmer_cpf: yup
       .string()
-      .test((value) => cpf.isValid(value!))
+      .test('Testando CPF inválido', 'Insira um CPF válido', (value) =>
+        cpf.isValid(value!)
+      )
       .required('Campo obrigatório'),
     harvest_date: yup
       .string()
       .max(date.getFullYear(), 'Insira uma data válida')
       .required('Campo obrigatório'),
-    latitude: yup.number().required(),
+    latitude: yup.string().required('Campo obrigatório'),
+    longitude: yup.string().required('Campo obrigatório'),
+    tillage_type: yup.string().required('Campo obrigatório'),
+    cause: yup.string().required('Campo obrigatório'),
   });
-
+  
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<RegistrationData>({ resolver: yupResolver(schema) });
+  } = useForm<IRegistrationProps>({ resolver: yupResolver(schema) });
+  
+  const { createRegistration } = useRegistration();
 
-  const { signup } = useAnalyst();
+  const selectOptions = [
+    'Chuva excessiva',
+    'Geada',
+    'Granizo',
+    'Seca',
+    'Vendaval',
+    'Raio',
+  ];
+  
 
-  //   return (
-  //     <Container>
-  //       <Form onSubmit={handleSubmit(signup)}>
-  //         <section>
-  //           <Input
-  //             label='Email'
-  //             name='email'
-  //             register={register}
-  //             error={errors.email?.message}
-  //           />
-  //           <Input
-  //             label='Nome de usuário'
-  //             name='username'
-  //             register={register}
-  //             error={errors.username?.message}
-  //           />
-  //           <Input
-  //             label='Senha'
-  //             name='password'
-  //             register={register}
-  //             type='password'
-  //             error={errors.password?.message}
-  //           />
-  //           <Button type='submit'>Cadastrar</Button>
-  //         </section>
-  //         <span className='span-bottom'>
-  //           Já possui uma credencial?<Link to='/'>Faça login</Link>
-  //         </span>
-  //       </Form>
-  //       <Footer />
-  //     </Container>
-  //   );
+  return (
+    <Container>
+      <h1>Cadastro de comunicação de perda</h1>
+      <Form onSubmit={handleSubmit(createRegistration)}>
+        <section className='inputs-form'>
+          <Input
+            label='Nome'
+            name='farmer_name'
+            register={register}
+            error={errors.farmer_name?.message}
+          />
+          <Input
+            label='Email'
+            name='farmer_email'
+            register={register}
+            error={errors.farmer_email?.message}
+          />
+          <Input
+            label='CPF'
+            name='farmer_cpf'
+            register={register}
+            error={errors.farmer_cpf?.message}
+          />
+            <Input
+              label='Latitude'
+              name='latitude'
+              register={register}
+              error={errors.latitude?.message}
+            />
+            <Input
+              label='Longitude'
+              name='longitude'
+              register={register}
+              error={errors.longitude?.message}
+            />
+          <Input
+            label='Tipo de lavoura'
+            name='tillage_type'
+            register={register}
+            error={errors.tillage_type?.message}
+          />
+          <Input
+            label='Data da colheita'
+            name='harvest_date'
+            register={register}
+            error={errors.harvest_date?.message}
+          />
+          <section className='select-options'>
+            <Select
+              label='Causa'
+              name='cause'
+              register={register}
+              error={errors.cause?.message}
+            >
+              {selectOptions.map((option) => (
+                <option key={option} value={option}>{option}</option>
+              ))}
+            </Select>
+          </section>
+          <Button type='submit'>Cadastrar</Button>
+        </section>
+      </Form>
+      <Footer />
+    </Container>
+  );
 };
 
 export default Registration;
