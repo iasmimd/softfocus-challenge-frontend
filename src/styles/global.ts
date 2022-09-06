@@ -31,12 +31,42 @@ export default createGlobalStyle`
         border-style: none;
     }
 
-    .customModal {
-        background: var(--primary-100);
-        max-width: 450px;
-        width: 90%;
-        position: absolute;
+    .overlay{
+        background-color: pink;
     }
+
+    .modal{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        margin: 0 auto;
+        background-color: var(--primary-100);
+        border-radius: 5px;
+        height: 500px;
+        width: 90%;
+        max-width: 320px;
+        margin-top: 10rem;
+        padding-bottom: 10px;
+   }
+
+   .modal > form{
+       display: flex;
+       flex-direction: column;
+       align-items: center;
+   }
+
+   .button-div{
+       margin-top: 10px;
+        display: flex;
+        justify-content: space-between;
+   }
+
+   .modal  svg{
+       width: 25px;
+       height: 20px;
+       margin-left: 215px;
+       margin-bottom: 10px;
+   }
 
     a{
         text-decoration: none;
@@ -47,7 +77,7 @@ export default createGlobalStyle`
         height: 2px;
     }
 
-::-webkit-scrollbar-thumb {
+    ::-webkit-scrollbar-thumb {
         background: #629460;
         border: 0px none #ffffff;
         border-radius: 0px;

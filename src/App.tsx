@@ -5,12 +5,12 @@ import { Toaster } from 'react-hot-toast';
 const App = () => {
   return (
     <>
+        <CreateGlobalStyle />
       <Toaster
         position='top-center'
         reverseOrder={false}
         toastOptions={{ style: { fontFamily: 'Inter' } }}
       />
-      <CreateGlobalStyle />
       <Routes />
     </>
   );

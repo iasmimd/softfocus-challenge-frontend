@@ -34,50 +34,54 @@ const RegistrationDetail = () => {
     setFilteredByCpfList(filteredCpf);
   };
 
+  const [registrationId, setRegistrationId] = useState("");
+ 
+
   return (
-    <Container>
-      <h1>Comunicações de perdas cadastradas</h1>
-      <InputContainer>
-        <label>Buscar por CPF</label>
-        <input onChange={(event) => filterByCpf(event.target.value)} />
-      </InputContainer>
-        {open && (
-          <ModalUpdate
-            onOpenModal={onOpenModal}
-            onCloseModal={onCloseModal}
-          />
-        )}
-      <ul>
-        {filteredByCpfList.length > 0 ? (
-          <>
-            {filteredByCpfList.map((registration) => (
+    <>
+      {open && <ModalUpdate isOpen={open} onCloseModal={onCloseModal} registrationId={registrationId}/>}
+      <Container>
+        <h1>Comunicações de perda cadastradas</h1>
+        <InputContainer>
+          <label>Buscar por CPF</label>
+          <input onChange={(event) => filterByCpf(event.target.value)} />
+        </InputContainer>
+
+        <ul>
+          {filteredByCpfList.length > 0 ? (
+            <>
+              {filteredByCpfList.map((registration) => (
+                <li key={registration.id}>
+                  <RegistrationCard
+                    onClick={onOpenModal}
+                    id={registration.id}
+                    farmer_name={registration.farmer_name}
+                    farmer_email={registration.farmer_email}
+                    last_modified={registration.last_modified}
+                  />
+                </li>
+              ))}
+            </>
+          ) : (
+            registrationsList.map((registration) => (
               <li key={registration.id}>
                 <RegistrationCard
-                  onClick={onOpenModal}
+                  onClick={() => {
+                    setRegistrationId(registration.id)
+                    onOpenModal;
+                  }}
                   id={registration.id}
                   farmer_name={registration.farmer_name}
                   farmer_email={registration.farmer_email}
                   last_modified={registration.last_modified}
                 />
               </li>
-            ))}
-          </>
-        ) : (
-          registrationsList.map((registration) => (
-            <li key={registration.id}>
-              <RegistrationCard
-                onClick={onOpenModal}
-                id={registration.id}
-                farmer_name={registration.farmer_name}
-                farmer_email={registration.farmer_email}
-                last_modified={registration.last_modified}
-              />
-            </li>
-          ))
-        )}
-      </ul>
-      <Footer />
-    </Container>
+            ))
+          )}
+        </ul>
+        <Footer />
+      </Container>
+    </>
   );
 };
 

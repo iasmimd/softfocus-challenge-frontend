@@ -6,10 +6,16 @@ import Input from '../../components/Input';
 import { useRegistration } from '../../providers/Registration';
 import Select from '../../components/Select';
 import { IRegistrationProps } from '../../interfaces/Registration';
-// import ReactModal from 'react-modal';
-import { Modal } from 'react-responsive-modal';
+import ReactModal from 'react-modal';
+import {CgCloseR} from 'react-icons/cg'
 
-const ModalUpdate = ({ onOpenModal, onCloseModal }: any) => {
+interface ModalProps{
+  isOpen: any;
+  onCloseModal: any;
+  registrationId: string;
+}
+
+const ModalUpdate = ({ isOpen, onCloseModal, registrationId }: any) => {
   const schema = yup.object().shape({
     farmer_email: yup
       .string()
@@ -41,16 +47,9 @@ const ModalUpdate = ({ onOpenModal, onCloseModal }: any) => {
 
   return (
     <>
-      <Modal
-        open={onOpenModal}
-        onClose={() => onCloseModal(false)}
-        center
-        classNames={{
-          overlay: 'customOverlay',
-          modal: 'customModal',
-        }}
-      >
+      <ReactModal isOpen={isOpen} ariaHideApp={false} className='modal'>
         <form onSubmit={handleSubmit(createRegistration)}>
+        <CgCloseR onClick={onCloseModal}/>
           <section className='inputs-form'>
             <Input
               label='Email'
@@ -90,11 +89,13 @@ const ModalUpdate = ({ onOpenModal, onCloseModal }: any) => {
                 ))}
               </Select>
             </section>
-            <Button type='submit'>Atualizar</Button>
-            <Button>Deletar</Button>
+            <div className='button-div'>
+              <Button type='submit'>Atualizar</Button>
+              <Button >Deletar</Button>
+            </div>
           </section>
         </form>
-      </Modal>
+      </ReactModal>
     </>
   );
 };

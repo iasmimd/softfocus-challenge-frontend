@@ -27,4 +27,14 @@ export interface IRegistrationResponse {
     createRegistration: (registration: IRegistrationProps) => Promise<void>;
     getAllRegistrations: () => Promise<void>;
     registrationsList: Array<IRegistrationResponse>;
+    uptadeRegistration: (id:string, registration: IRegistrationUpdate) => Promise<void>
+  }
+
+  export interface IRegistrationUpdate {
+    id:string;
+    farmer_email: string;
+    latitude: number;
+    longitude: number;
+    tillage_type: string;
+    cause: string;
   }

@@ -2,7 +2,8 @@ import { createContext, useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import api from '../../services/api';
 import toast from 'react-hot-toast';
-import {IRegistrationProps, IRegistrationContext} from '../../interfaces/Registration'
+import {IRegistrationProps, IRegistrationContext, IRegistrationUpdate} from '../../interfaces/Registration'
+import { ThemeContext } from 'styled-components';
 
 interface RegistrationProviderProps {
   children: React.ReactNode;
@@ -37,9 +38,15 @@ const RegistrationProvider = ({ children }: RegistrationProviderProps) => {
       .catch((err) => console.log(err));
   };
 
+  const uptadeRegistration = async (id:string, registration:IRegistrationUpdate) => {
+    await api.patch(`registrations/detail/${id}/`, registration)
+    .then((res) => console.log(res.data))
+    .catch((err) => console.log(err))
+  }
+
   return (
     <RegistrationContext.Provider
-      value={{ createRegistration, getAllRegistrations, registrationsList }}
+      value={{ createRegistration, getAllRegistrations, registrationsList, uptadeRegistration }}
     >
       {children}
     </RegistrationContext.Provider>
