@@ -4,11 +4,14 @@ import file from '../../assets/files.svg';
 import { Container } from './style';
 import Footer from '../../components/Footer';
 import nature from '../../assets/nature.svg';
-import { useHistory } from 'react-router-dom';
-import { useRegistration } from '../../providers/Registration';
+import { Redirect, useHistory } from 'react-router-dom';
 
-const Dashboard = () => {
+const Dashboard = ({autentication}: any) => {
   const history = useHistory()
+
+  if (!autentication) {
+    return <Redirect to="/" />;
+  }
 
   return (
     <Container>

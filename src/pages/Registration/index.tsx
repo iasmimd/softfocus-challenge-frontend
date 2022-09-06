@@ -14,7 +14,7 @@ import {IRegistrationProps} from '../../interfaces/Registration'
 
 
 
-const Registration = () => {
+const Registration = ({autentication}: any) => {
   const date = new Date();
 
   const schema = yup.object().shape({
@@ -56,6 +56,9 @@ const Registration = () => {
     'Raio',
   ];
   
+  if (!autentication) {
+    return <Redirect to="/" />;
+  }
 
   return (
     <Container>

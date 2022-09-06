@@ -7,25 +7,22 @@ import { useRegistration } from '../../providers/Registration';
 import Select from '../../components/Select';
 import { IRegistrationProps } from '../../interfaces/Registration';
 import ReactModal from 'react-modal';
-import {CgCloseR} from 'react-icons/cg'
+import { CgCloseR } from 'react-icons/cg';
 
-interface ModalProps{
+interface ModalProps {
   isOpen: any;
   onCloseModal: any;
   registrationId: string;
 }
 
-const ModalUpdate = ({ isOpen, onCloseModal, registrationId }: any) => {
+const ModalUpdate = ({ isOpen, onCloseModal }: any) => {
   const schema = yup.object().shape({
-    farmer_email: yup
-      .string()
-      .email('Insira um email válido')
-      .required('Campo obrigatório'),
+    farmer_email: yup.string().email('Insira um email válido'),
 
-    latitude: yup.string().required('Campo obrigatório'),
-    longitude: yup.string().required('Campo obrigatório'),
-    tillage_type: yup.string().required('Campo obrigatório'),
-    cause: yup.string().required('Campo obrigatório'),
+    latitude: yup.string(),
+    longitude: yup.string(),
+    tillage_type: yup.string(),
+    cause: yup.string(),
   });
 
   const {
@@ -34,7 +31,7 @@ const ModalUpdate = ({ isOpen, onCloseModal, registrationId }: any) => {
     formState: { errors },
   } = useForm<IRegistrationProps>({ resolver: yupResolver(schema) });
 
-  const { createRegistration } = useRegistration();
+  const { uptadeRegistration, deleteRegistration } = useRegistration();
 
   const selectOptions = [
     'Chuva excessiva',
@@ -45,11 +42,21 @@ const ModalUpdate = ({ isOpen, onCloseModal, registrationId }: any) => {
     'Raio',
   ];
 
+  const updateRegistrationCallback = (data: any) => {
+    uptadeRegistration(data);
+    onCloseModal()
+  };
+
+  const deleteRegistrationCallback = () => {
+    deleteRegistration();
+    onCloseModal()
+  };
+
   return (
     <>
       <ReactModal isOpen={isOpen} ariaHideApp={false} className='modal'>
-        <form onSubmit={handleSubmit(createRegistration)}>
-        <CgCloseR onClick={onCloseModal}/>
+        <form onSubmit={handleSubmit(updateRegistrationCallback)}>
+          <CgCloseR onClick={onCloseModal} />
           <section className='inputs-form'>
             <Input
               label='Email'
@@ -91,7 +98,9 @@ const ModalUpdate = ({ isOpen, onCloseModal, registrationId }: any) => {
             </section>
             <div className='button-div'>
               <Button type='submit'>Atualizar</Button>
-              <Button >Deletar</Button>
+              <Button type='button' onClick={deleteRegistrationCallback}>
+                Deletar
+              </Button>
             </div>
           </section>
         </form>

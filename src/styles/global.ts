@@ -72,6 +72,10 @@ export default createGlobalStyle`
         text-decoration: none;
     }
 
+    select{
+        padding-left: 13px;
+    }
+
     ::-webkit-scrollbar {
         width: 4px;
         height: 2px;

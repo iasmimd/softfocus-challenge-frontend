@@ -47,7 +47,6 @@ export const Form = styled.form`
 
   a{
     padding-left: 5px;
-    color: var(--primary-300);
   }
 
   section {

@@ -1,3 +1,5 @@
+import { SubmitHandler } from 'react-hook-form';
+
 export interface IRegistrationProps {
     farmer_name: string;
     farmer_email: string;
@@ -27,7 +29,9 @@ export interface IRegistrationResponse {
     createRegistration: (registration: IRegistrationProps) => Promise<void>;
     getAllRegistrations: () => Promise<void>;
     registrationsList: Array<IRegistrationResponse>;
-    uptadeRegistration: (id:string, registration: IRegistrationUpdate) => Promise<void>
+    setRegistrationId: (active: string) => void;
+    uptadeRegistration: (registration: IRegistrationUpdate) => Promise<void>;
+    deleteRegistration: () => Promise<void>;
   }
 
   export interface IRegistrationUpdate {

@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import Dashboard from '../pages/Dashboard';
 import Login from '../pages/Login';
@@ -6,6 +7,15 @@ import RegistrationDetail from '../pages/RegistrationDetail';
 import Signup from '../pages/Signup';
 
 const Routes = () => {
+  const [autentication, setAutentication] = useState<Boolean>(false);
+
+  useEffect(() => {
+    const token = JSON.parse(localStorage.getItem('@proagro:auth') || '{}');
+    if (token) {
+      return setAutentication(true);
+    }
+  }, [autentication]);
+
   return (
     <Switch>
       <Route exact path='/'>
@@ -15,13 +25,13 @@ const Routes = () => {
         <Signup />
       </Route>
       <Route path='/dashboard'>
-        <Dashboard />
+        <Dashboard autentication={autentication}/>
       </Route>
       <Route path='/registrar-comunicação'>
-        <Registration />
+        <Registration autentication={autentication}/>
       </Route>
       <Route path='/comunicações'>
-        <RegistrationDetail/>
+        <RegistrationDetail autentication={autentication}/>
       </Route>
       <Route path='/comunicação/'>
 

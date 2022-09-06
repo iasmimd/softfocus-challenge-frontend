@@ -8,7 +8,7 @@ interface RegistrationResponse {
   farmer_name: string;
   farmer_email: string;
   last_modified?: Date;
-  onClick: () => void
+  onClick: () => any
 }
 
 const RegistrationCard = ({

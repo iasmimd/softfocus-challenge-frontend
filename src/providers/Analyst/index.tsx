@@ -16,8 +16,9 @@ const AnalystProvider = ({ children }: AnalystProviderProps) => {
   const signup = async (analyst: IAnalystRegisterProps) => {
     await api
       .post('analysts/', analyst)
-      .then((res) => {
-        console.log('yey');
+      .then((_) => {
+        toast.success('Credencial criada com sucesso')
+        return history.push('/')
       })
       .catch((_) => toast.error('Algo deu errado'));
   };

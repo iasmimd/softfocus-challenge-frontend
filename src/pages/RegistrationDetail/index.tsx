@@ -6,13 +6,18 @@ import RegistrationCard from '../../components/RegistrationCard';
 import Footer from '../../components/Footer';
 import Modal from '../../components/Modal';
 import ModalUpdate from '../../components/Modal';
+import { Redirect } from 'react-router-dom';
 
-const RegistrationDetail = () => {
+const RegistrationDetail = ({autentication}: any) => {
   const { registrationsList, getAllRegistrations } = useRegistration();
 
   const [open, setOpen] = useState(false);
 
-  const onOpenModal = () => setOpen(true);
+  const onOpenModal = (id: string) => {
+    setOpen(true);
+    setRegistrationId(id);
+  };
+
   const onCloseModal = () => setOpen(false);
 
   const [filteredByCpfList, setFilteredByCpfList] = useState<
@@ -34,12 +39,20 @@ const RegistrationDetail = () => {
     setFilteredByCpfList(filteredCpf);
   };
 
-  const [registrationId, setRegistrationId] = useState("");
- 
+  const {setRegistrationId} = useRegistration()
+
+  if (!autentication) {
+    return <Redirect to="/" />;
+  }
 
   return (
     <>
-      {open && <ModalUpdate isOpen={open} onCloseModal={onCloseModal} registrationId={registrationId}/>}
+      {open && (
+        <ModalUpdate
+          isOpen={open}
+          onCloseModal={onCloseModal}
+        />
+      )}
       <Container>
         <h1>Comunicações de perda cadastradas</h1>
         <InputContainer>
@@ -53,7 +66,7 @@ const RegistrationDetail = () => {
               {filteredByCpfList.map((registration) => (
                 <li key={registration.id}>
                   <RegistrationCard
-                    onClick={onOpenModal}
+                    onClick={() => onOpenModal(registration.id)}
                     id={registration.id}
                     farmer_name={registration.farmer_name}
                     farmer_email={registration.farmer_email}
@@ -64,18 +77,17 @@ const RegistrationDetail = () => {
             </>
           ) : (
             registrationsList.map((registration) => (
-              <li key={registration.id}>
-                <RegistrationCard
-                  onClick={() => {
-                    setRegistrationId(registration.id)
-                    onOpenModal;
-                  }}
-                  id={registration.id}
-                  farmer_name={registration.farmer_name}
-                  farmer_email={registration.farmer_email}
-                  last_modified={registration.last_modified}
-                />
-              </li>
+              <>
+                <li key={registration.id}>
+                  <RegistrationCard
+                    onClick={() => onOpenModal(registration.id)}
+                    id={registration.id}
+                    farmer_name={registration.farmer_name}
+                    farmer_email={registration.farmer_email}
+                    last_modified={registration.last_modified}
+                  />
+                </li>
+              </>
             ))
           )}
         </ul>

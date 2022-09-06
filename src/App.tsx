@@ -9,7 +9,7 @@ const App = () => {
       <Toaster
         position='top-center'
         reverseOrder={false}
-        toastOptions={{ style: { fontFamily: 'Inter' } }}
+        toastOptions={{ style: { fontFamily: 'Nunito' } }}
       />
       <Routes />
     </>
