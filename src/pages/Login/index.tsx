@@ -1,16 +1,16 @@
 import * as yup from 'yup';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Link, Redirect, useHistory } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import Button from '../../components/Button';
 import Input from '../../components/Input';
 import Footer from '../../components/Footer';
 import { Container, Form } from './style';
 import logo from '../../assets/logo.svg';
 import { useAnalyst } from '../../providers/Analyst';
-import {IAnalystLoginProps} from '../../interfaces/Analyst'
+import { IAnalystLoginProps } from '../../interfaces/Analyst';
 
-const Login = () => {
+const Login = ({ autentication }: any) => {
   const schema = yup.object().shape({
     username: yup.string().required('Campo obrigatório'),
     password: yup.string().required('Campo obrigatório'),
@@ -23,6 +23,10 @@ const Login = () => {
   } = useForm<IAnalystLoginProps>({ resolver: yupResolver(schema) });
 
   const { login } = useAnalyst();
+
+  if (autentication) {
+    return <Redirect to='/dashboard' />;
+  }
 
   return (
     <Container>
@@ -51,7 +55,8 @@ const Login = () => {
           <Button type='submit'>Logar</Button>
         </section>
         <span className='bottom-span'>
-          Ainda não criou uma credencial? <Link to="/signup">Cadastre-se aqui</Link>
+          Ainda não criou uma credencial?{' '}
+          <Link to='/signup'>Cadastre-se aqui</Link>
         </span>
       </Form>
       <Footer />

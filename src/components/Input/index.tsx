@@ -9,7 +9,7 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 }
 
 const Input = ({ label, name, register, error, ...rest }: InputProps) => {
-  return  (
+  return (
     <Container>
       <div>
         {label} {error && <span> - {error} </span>}

@@ -32,7 +32,7 @@ export const Container = styled.div`
   }
 
   h1 {
-    font-size: 16px;
+    font-size: 18px;
   }
 
   @media (min-width: 768px) {

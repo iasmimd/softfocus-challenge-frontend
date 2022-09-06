@@ -6,11 +6,11 @@ import Footer from '../../components/Footer';
 import nature from '../../assets/nature.svg';
 import { Redirect, useHistory } from 'react-router-dom';
 
-const Dashboard = ({autentication}: any) => {
-  const history = useHistory()
+const Dashboard = ({ autentication }: any) => {
+  const history = useHistory();
 
   if (!autentication) {
-    return <Redirect to="/" />;
+    return <Redirect to='/' />;
   }
 
   return (
@@ -22,7 +22,7 @@ const Dashboard = ({autentication}: any) => {
             <h1>Área do analista</h1>
             <p>
               Cadastre, atualize e exclua comunicações de perda de uma maneira
-              simplificada
+              simplificada.
             </p>
           </div>
           <SectionCard

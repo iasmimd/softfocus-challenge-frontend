@@ -12,4 +12,6 @@ export interface IAnalystRegisterProps {
   export interface IAnalystContext {
     signup: (analyst: IAnalystRegisterProps) => Promise<void>;
     login: (analyst: IAnalystLoginProps) => Promise<void>;
+    autentication: any;
+    setAutentication: any;
   }

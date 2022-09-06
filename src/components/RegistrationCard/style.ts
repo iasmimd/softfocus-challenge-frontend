@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const Container = styled.section`
   width: 90%;
   max-width: 350px;
-  height: 130px;
+  height: 230px;
   border-radius: 5px;
   border: 2px solid var(--primary-200);
   background-color: var(--white);
@@ -15,6 +15,10 @@ export const Container = styled.section`
     font-size: 16px;
     font-weight: 900;
     padding-bottom: 8px;
+  }
+
+  .atention-span{
+    color: var(--red);
   }
 
   :hover {

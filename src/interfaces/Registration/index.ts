@@ -21,6 +21,7 @@ export interface IRegistrationResponse {
     tillage_type: string;
     harvest_date: Date;
     cause: string;
+    is_duplicate_registration: boolean;
     last_modified: Date;
     analyst_id: string;
   }

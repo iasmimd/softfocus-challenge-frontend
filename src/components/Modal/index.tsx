@@ -18,7 +18,6 @@ interface ModalProps {
 const ModalUpdate = ({ isOpen, onCloseModal }: any) => {
   const schema = yup.object().shape({
     farmer_email: yup.string().email('Insira um email válido'),
-
     latitude: yup.string(),
     longitude: yup.string(),
     tillage_type: yup.string(),
@@ -44,12 +43,12 @@ const ModalUpdate = ({ isOpen, onCloseModal }: any) => {
 
   const updateRegistrationCallback = (data: any) => {
     uptadeRegistration(data);
-    onCloseModal()
+    onCloseModal();
   };
 
   const deleteRegistrationCallback = () => {
     deleteRegistration();
-    onCloseModal()
+    onCloseModal();
   };
 
   return (

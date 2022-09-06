@@ -1,20 +1,21 @@
 import * as yup from 'yup';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Link, Redirect, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Button from '../../components/Button';
 import Input from '../../components/Input';
 import Footer from '../../components/Footer';
 import { Container, Form } from './style';
 import logo from '../../assets/logo.svg';
 import { useAnalyst } from '../../providers/Analyst';
-import {IAnalystRegisterProps} from '../../interfaces/Analyst'
-
-
+import { IAnalystRegisterProps } from '../../interfaces/Analyst';
 
 const Signup = () => {
   const schema = yup.object().shape({
-    email: yup.string().email('Insira um email válido').required('Campo obrigatório'),
+    email: yup
+      .string()
+      .email('Insira um email válido')
+      .required('Campo obrigatório'),
     username: yup.string().required('Campo obrigatório'),
     password: yup.string().required('Campo obrigatório'),
   });

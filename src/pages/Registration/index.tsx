@@ -1,20 +1,20 @@
 import * as yup from 'yup';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Link, Redirect, useHistory } from 'react-router-dom';
+import { Redirect, useHistory } from 'react-router-dom';
 import Button from '../../components/Button';
 import Input from '../../components/Input';
 import Footer from '../../components/Footer';
 import { Container, Form } from './style';
-import logo from '../../assets/logo.svg';
 import { cpf } from 'cpf-cnpj-validator';
 import { useRegistration } from '../../providers/Registration';
 import Select from '../../components/Select';
-import {IRegistrationProps} from '../../interfaces/Registration'
+import { IRegistrationProps } from '../../interfaces/Registration';
+import Header from '../../components/Header';
 
+const Registration = ({ autentication }: any) => {
+  const history = useHistory()
 
-
-const Registration = ({autentication}: any) => {
   const date = new Date();
 
   const schema = yup.object().shape({
@@ -38,13 +38,13 @@ const Registration = ({autentication}: any) => {
     tillage_type: yup.string().required('Campo obrigatório'),
     cause: yup.string().required('Campo obrigatório'),
   });
-  
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<IRegistrationProps>({ resolver: yupResolver(schema) });
-  
+
   const { createRegistration } = useRegistration();
 
   const selectOptions = [
@@ -55,34 +55,36 @@ const Registration = ({autentication}: any) => {
     'Vendaval',
     'Raio',
   ];
-  
+
   if (!autentication) {
-    return <Redirect to="/" />;
+    return <Redirect to='/' />;
   }
 
   return (
-    <Container>
-      <h1>Cadastro de comunicação de perda</h1>
-      <Form onSubmit={handleSubmit(createRegistration)}>
-        <section className='inputs-form'>
-          <Input
-            label='Nome'
-            name='farmer_name'
-            register={register}
-            error={errors.farmer_name?.message}
-          />
-          <Input
-            label='Email'
-            name='farmer_email'
-            register={register}
-            error={errors.farmer_email?.message}
-          />
-          <Input
-            label='CPF'
-            name='farmer_cpf'
-            register={register}
-            error={errors.farmer_cpf?.message}
-          />
+    <>
+      <Header />
+      <Container>
+        <h1>Cadastro de comunicação de perda</h1>
+        <Form onSubmit={handleSubmit(createRegistration)}>
+          <section className='inputs-form'>
+            <Input
+              label='Nome'
+              name='farmer_name'
+              register={register}
+              error={errors.farmer_name?.message}
+            />
+            <Input
+              label='Email'
+              name='farmer_email'
+              register={register}
+              error={errors.farmer_email?.message}
+            />
+            <Input
+              label='CPF'
+              name='farmer_cpf'
+              register={register}
+              error={errors.farmer_cpf?.message}
+            />
             <Input
               label='Latitude'
               name='latitude'
@@ -95,35 +97,38 @@ const Registration = ({autentication}: any) => {
               register={register}
               error={errors.longitude?.message}
             />
-          <Input
-            label='Tipo de lavoura'
-            name='tillage_type'
-            register={register}
-            error={errors.tillage_type?.message}
-          />
-          <Input
-            label='Data da colheita'
-            name='harvest_date'
-            register={register}
-            error={errors.harvest_date?.message}
-          />
-          <section className='select-options'>
-            <Select
-              label='Causa'
-              name='cause'
+            <Input
+              label='Tipo de lavoura'
+              name='tillage_type'
               register={register}
-              error={errors.cause?.message}
-            >
-              {selectOptions.map((option) => (
-                <option key={option} value={option}>{option}</option>
-              ))}
-            </Select>
+              error={errors.tillage_type?.message}
+            />
+            <Input
+              label='Data da colheita'
+              name='harvest_date'
+              register={register}
+              error={errors.harvest_date?.message}
+            />
+            <section className='select-options'>
+              <Select
+                label='Causa'
+                name='cause'
+                register={register}
+                error={errors.cause?.message}
+              >
+                {selectOptions.map((option) => (
+                  <option key={option} value={option}>
+                    {option}
+                  </option>
+                ))}
+              </Select>
+            </section>
+            <Button type='submit' onClick={() => history.push('/dashboard')}>Cadastrar</Button>
           </section>
-          <Button type='submit'>Cadastrar</Button>
-        </section>
-      </Form>
-      <Footer />
-    </Container>
+        </Form>
+        <Footer />
+      </Container>
+    </>
   );
 };
 

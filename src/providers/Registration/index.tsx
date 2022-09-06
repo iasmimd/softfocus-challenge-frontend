@@ -7,7 +7,6 @@ import {
   IRegistrationContext,
   IRegistrationUpdate,
 } from '../../interfaces/Registration';
-import { ThemeContext } from 'styled-components';
 
 interface RegistrationProviderProps {
   children: React.ReactNode;
@@ -30,17 +29,20 @@ const RegistrationProvider = ({ children }: RegistrationProviderProps) => {
     await api
       .post(`registrations/${auth.user_id}/`, registration)
       .then((res) => {
-        toast.success('Comunicação registrada com sucesso');
-        getAllRegistrations();
-        return history.push('/dashboard');
+        res.data.is_duplicate_registration
+          ? toast(
+              'Alerta: existe um cadastro no banco de dados, com a mesma data, em um raio de 10km, e uma causa divergente da cadastrada agora.'
+            )
+          : toast.success('Comunicação registrada com sucesso');
+          console.log(res.data)
       })
-      .catch((_) => toast.error('Algo deu errado'));
+      .catch((err) => toast.error(`${err.response.data.location}`));
   };
 
   const getAllRegistrations = async () => {
     await api
       .get('registrations/')
-      .then((res) => setRegistrationsList(res.data))
+      .then((res) => setRegistrationsList(res.data));
   };
 
   const uptadeRegistration = async (registration: IRegistrationUpdate) => {
@@ -65,7 +67,7 @@ const RegistrationProvider = ({ children }: RegistrationProviderProps) => {
         registrationsList,
         uptadeRegistration,
         setRegistrationId,
-        deleteRegistration
+        deleteRegistration,
       }}
     >
       {children}

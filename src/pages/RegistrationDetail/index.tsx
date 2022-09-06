@@ -4,11 +4,11 @@ import { Container, InputContainer } from './style';
 import { IRegistrationResponse } from '../../interfaces/Registration';
 import RegistrationCard from '../../components/RegistrationCard';
 import Footer from '../../components/Footer';
-import Modal from '../../components/Modal';
 import ModalUpdate from '../../components/Modal';
 import { Redirect } from 'react-router-dom';
+import Header from '../../components/Header';
 
-const RegistrationDetail = ({autentication}: any) => {
+const RegistrationDetail = ({ autentication }: any) => {
   const { registrationsList, getAllRegistrations } = useRegistration();
 
   const [open, setOpen] = useState(false);
@@ -39,20 +39,16 @@ const RegistrationDetail = ({autentication}: any) => {
     setFilteredByCpfList(filteredCpf);
   };
 
-  const {setRegistrationId} = useRegistration()
+  const { setRegistrationId } = useRegistration();
 
   if (!autentication) {
-    return <Redirect to="/" />;
+    return <Redirect to='/' />;
   }
 
   return (
     <>
-      {open && (
-        <ModalUpdate
-          isOpen={open}
-          onCloseModal={onCloseModal}
-        />
-      )}
+      {open && <ModalUpdate isOpen={open} onCloseModal={onCloseModal} />}
+      <Header />
       <Container>
         <h1>Comunicações de perda cadastradas</h1>
         <InputContainer>
@@ -64,12 +60,20 @@ const RegistrationDetail = ({autentication}: any) => {
           {filteredByCpfList.length > 0 ? (
             <>
               {filteredByCpfList.map((registration) => (
-                <li key={registration.id}>
+                <li>
                   <RegistrationCard
+                    key={registration.id}
                     onClick={() => onOpenModal(registration.id)}
                     id={registration.id}
                     farmer_name={registration.farmer_name}
                     farmer_email={registration.farmer_email}
+                    latitude={registration.latitude}
+                    longitude={registration.longitude}
+                    tillage_type={registration.tillage_type}
+                    cause={registration.cause}
+                    is_duplicate_registration={
+                      registration.is_duplicate_registration
+                    }
                     last_modified={registration.last_modified}
                   />
                 </li>
@@ -78,12 +82,20 @@ const RegistrationDetail = ({autentication}: any) => {
           ) : (
             registrationsList.map((registration) => (
               <>
-                <li key={registration.id}>
+                <li>
                   <RegistrationCard
+                    key={registration.id}
                     onClick={() => onOpenModal(registration.id)}
                     id={registration.id}
                     farmer_name={registration.farmer_name}
                     farmer_email={registration.farmer_email}
+                    latitude={registration.latitude}
+                    longitude={registration.longitude}
+                    tillage_type={registration.tillage_type}
+                    cause={registration.cause}
+                    is_duplicate_registration={
+                      registration.is_duplicate_registration
+                    }
                     last_modified={registration.last_modified}
                   />
                 </li>
