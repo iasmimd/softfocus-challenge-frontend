@@ -23,6 +23,9 @@ const Routes = () => {
       <Route path='/comunicações'>
         <RegistrationDetail/>
       </Route>
+      <Route path='/comunicação/'>
+
+      </Route>
     </Switch>
   );
 };

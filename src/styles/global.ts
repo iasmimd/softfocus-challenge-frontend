@@ -31,6 +31,13 @@ export default createGlobalStyle`
         border-style: none;
     }
 
+    .customModal {
+        background: var(--primary-100);
+        max-width: 450px;
+        width: 90%;
+        position: absolute;
+    }
+
     a{
         text-decoration: none;
     }
