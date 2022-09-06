@@ -15,3 +15,6 @@ Principais tecnologias utilizadas:
 ## Link da aplicação:
 
 https://softfocus-challenge-frontend-iasmimd.vercel.app/
+
+## Figma base:
+https://www.figma.com/file/VryhIkPqaumDWkRwYCesGM/proagro?node-id=9%3A276
